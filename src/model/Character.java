@@ -74,13 +74,13 @@ public class Character {
 
 
     public int menu(){
-        int dano = 0;
+        int hurt = 0;
         System.out.println("Turno de: " + this);
         System.out.print("1 - " + descripcionHabilidad1() + "\n2 - " + descripcionHabilidad2() + "\n3 - " + descripcionHabilidad3());
-        dano += habilidad1();
-        dano += habilidad2();
-        dano += habilidad3();
-        return dano;
+        hurt += habilidad1();
+        hurt += habilidad2();
+        hurt += habilidad3();
+        return hurt;
     }
     //DESCRIPCIONES DE HABILIDAD
     String descripcionHabilidad1() {
