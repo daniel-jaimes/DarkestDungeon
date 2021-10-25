@@ -15,24 +15,36 @@ public class Bandolero extends Character {
     public void descansar(){
         super.maxHealth(5);
     }
-    //HABILITIES
+    //HABILITIES - return hurt
     @Override
     public int habilidad1(){
         recoverHealth(2);
+        System.out.println(descripcionHabilidad1());
         return 1;
     }
     @Override
     public int habilidad2(){
-        int dano, dado1, dado2;
-        Random rnd = new Random();
-        dado1 = rnd.nextInt(6) + 1;
-        dado2 = rnd.nextInt(6) + 1;
-        dano = dado1 + dado2;
-        if(dano == 7) return -5;
-        return super.habilidad2();
+        System.out.println(descripcionHabilidad2());
+        return -1;
     }
     @Override
     public int habilidad3(){
-        return -1;
+        int dado = new Random().nextInt(6) + 1;
+        if(dado >= 4) {
+            System.out.println(descripcionHabilidad3());
+            return 3;
+        }
+        return super.habilidad3();
     }
+    //DESCRIPCIONES DE HABILIDAD - TO DO
+    private String descripcionHabilidad1() {
+        return "Recupera 2 de salud y 1 de dano";
+    }
+    private String descripcionHabilidad2() {
+        return "Menos 1 de dano";
+    }
+    private String descripcionHabilidad3() {
+        return "3 de dano";
+    }
+
 }
