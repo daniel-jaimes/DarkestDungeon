@@ -95,9 +95,9 @@ public class Character {
 
     public int habilidadRandom(int valor){
         if(valor == 0) return habilidad1();
-        if(valor == 1) return habilidad2();
+        else if (valor == 1) return habilidad2();
         if(valor == 2) return habilidad3();
         if(valor == 3) return 0;
-        return valor;
+
     }
 }
