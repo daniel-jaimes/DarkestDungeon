@@ -13,7 +13,6 @@ public class Character {
         this.maxScope = maxScope;
         this.life = true;
     }
-
     @Override
     public String toString(){
         return "[tipo=" + getTipo() + ", salud=" + this.health + ", estres=" + this.stress + "]";
@@ -22,7 +21,7 @@ public class Character {
         return "Soy la clase papasote";
     }
     public void descansar(){
-        System.out.println("A MEJORAR A OTRO!");
+
     }
     //SETTERS
     void maxHealth(int health){
@@ -83,7 +82,6 @@ public class Character {
         dano += habilidad3();
         return dano;
     }
-
     //DESCRIPCIONES DE HABILIDAD
     String descripcionHabilidad1() {
         return "Habilidad1 - no tiene efecto";
@@ -96,22 +94,10 @@ public class Character {
     }
 
     public int habilidadRandom(int valor){
-        int dano = 0;
-        switch(valor){
-            case 0:
-                dano = habilidad1();
-                break;
-            case 1:
-                dano = habilidad2();
-                break;
-            case 2:
-                dano = habilidad3();
-                break;
-            case 3:
-                dano = 0;
-                //Ha fallado
-                break;
-        }
-        return dano;
+        if(valor == 0) return habilidad1();
+        if(valor == 1) return habilidad2();
+        if(valor == 2) return habilidad3();
+        if(valor == 3) return 0;
+        return valor;
     }
 }

@@ -92,9 +92,7 @@ public class Manager {
     }
 
     private void descansar() {
-        for (Character goodPerson : this.goodPeople) {
-            goodPerson.descansar();
-        }
+        this.goodPeople.forEach(goodPerson -> goodPerson.descansar());
     }
 
     private void newDungeon() {
