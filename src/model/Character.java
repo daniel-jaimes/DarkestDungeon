@@ -85,13 +85,13 @@ public class Character {
     }
 
     //DESCRIPCIONES DE HABILIDAD
-    private String descripcionHabilidad1() {
+    String descripcionHabilidad1() {
         return "Habilidad1 - no tiene efecto";
     }
-    private String descripcionHabilidad2() {
+    String descripcionHabilidad2() {
         return "Habilidad2 - no tiene efecto";
     }
-    private String descripcionHabilidad3() {
+    String descripcionHabilidad3() {
         return "Habilidad3 - no tiene efecto";
     }
 

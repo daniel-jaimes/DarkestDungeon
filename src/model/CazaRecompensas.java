@@ -42,13 +42,16 @@ public class CazaRecompensas extends Character {
         return -1;
     }
     //DESCRIPCIONES DE HABILIDAD - TO DO
-    private String descripcionHabilidad1() {
+    @Override
+    String descripcionHabilidad1() {
         return "Recupera 1 de estres y 1 de dano";
     }
-    private String descripcionHabilidad2() {
+    @Override
+    String descripcionHabilidad2() {
         return "Menos 5 de dano";
     }
-    private String descripcionHabilidad3() {
+    @Override
+    String descripcionHabilidad3() {
         return "Menos 1 de dano";
     }
 

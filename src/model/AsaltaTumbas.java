@@ -34,4 +34,16 @@ public class AsaltaTumbas extends Character {
         if(dado >= 5) return -2;
         return super.habilidad3();
     }
+    @Override
+    String descripcionHabilidad1() {
+        return "Recupera 1 de estres y 1 de dano";
+    }
+    @Override
+    String descripcionHabilidad2() {
+        return "Menos 5 de dano";
+    }
+    @Override
+    String descripcionHabilidad3() {
+        return "Menos 1 de dano";
+    }
 }

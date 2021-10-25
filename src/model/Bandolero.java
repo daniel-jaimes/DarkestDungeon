@@ -37,13 +37,16 @@ public class Bandolero extends Character {
         return super.habilidad3();
     }
     //DESCRIPCIONES DE HABILIDAD - TO DO
-    private String descripcionHabilidad1() {
+    @Override
+    String descripcionHabilidad1() {
         return "Recupera 2 de salud y 1 de dano";
     }
-    private String descripcionHabilidad2() {
+    @Override
+    String descripcionHabilidad2() {
         return "Menos 1 de dano";
     }
-    private String descripcionHabilidad3() {
+    @Override
+    String descripcionHabilidad3() {
         return "3 de dano";
     }
 
