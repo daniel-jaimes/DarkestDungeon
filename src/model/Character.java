@@ -1,5 +1,9 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class Character {
     private int health;
     private int stress;
@@ -74,6 +78,7 @@ public class Character {
 
 
     public int menu(){
+        //TODO
         int hurt = 0;
         System.out.println("Turno de: " + this);
         System.out.print("1 - " + descripcionHabilidad1() + "\n2 - " + descripcionHabilidad2() + "\n3 - " + descripcionHabilidad3());
@@ -94,10 +99,33 @@ public class Character {
     }
 
     public int habilidadRandom(int valor){
-        if(valor == 0) return habilidad1();
-        else if (valor == 1) return habilidad2();
-        if(valor == 2) return habilidad3();
-        if(valor == 3) return 0;
-
+        if(valor >= 0 && valor <= 3){
+            if(valor == 0) return habilidad1();
+            else if(valor == 1) return habilidad2();
+            else if(valor == 2) return habilidad3();
+            else return 0;
+        }
+        return -1;
     }
+
+    public boolean isAlive() {
+        return this.life;
+    }
+    public void movementEnemiesClose(ArrayList<Character> badPeople, int hurt){
+        Scanner sc = new Scanner(System.in);
+        boolean out_of_range = this.maxScope > badPeople.size();
+        int index_max = this.maxScope, select;
+        if(out_of_range) index_max = badPeople.size();
+        AtomicInteger i = new AtomicInteger(1);
+        badPeople.subList(this.minScope - 1, index_max - 1).forEach(enemies -> {
+            System.out.println(i + " - " + enemies.toString());
+            i.getAndIncrement();
+        });
+        do {
+            select = sc.nextInt();
+            if()
+        }while()
+        badPeople.subList(this.minScope - 1, index_max - 1).remove();
+    }
+
 }

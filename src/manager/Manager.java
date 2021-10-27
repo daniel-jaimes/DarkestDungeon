@@ -14,8 +14,8 @@ public class Manager {
     private ArrayList<Character> badPeople;
     private Character[] allPlayers;
     public Manager() {
-        this.goodPeople = new ArrayList<Character>();
-        this.badPeople = new ArrayList<Character>();
+        this.goodPeople = new ArrayList<>();
+        this.badPeople = new ArrayList<>();
         this.allPlayers = new Character[]{
                 new Abomination(),
                 new CazaRecompensas(),
@@ -96,7 +96,19 @@ public class Manager {
     }
 
     private void newDungeon() {
+        this.goodPeople.forEach(person -> {
+            int hurt = 0;
+            if(person.isAlive()){
+                System.out.println(person);
+                hurt = person.menu();
+                person.movementEnemiesClose(this.badPeople, hurt);
+                
+                //(this.badPeople, hurt);
 
+            } else {
+
+            }
+        });
     }
 
     private void generarEnemigos() {
