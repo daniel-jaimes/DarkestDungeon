@@ -116,16 +116,21 @@ public class Character {
         boolean out_of_range = this.maxScope > badPeople.size();
         int index_max = this.maxScope, select;
         if(out_of_range) index_max = badPeople.size();
-        AtomicInteger i = new AtomicInteger(1);
-        badPeople.subList(this.minScope - 1, index_max - 1).forEach(enemies -> {
-            System.out.println(i + " - " + enemies.toString());
-            i.getAndIncrement();
-        });
+        ArrayList<Character> auxBadPeople = (ArrayList<Character>) badPeople.subList(this.minScope - 1, index_max - 1);
         do {
+            AtomicInteger i = new AtomicInteger(1);
+            auxBadPeople.forEach(enemies -> {
+                System.out.println(i + " - " + enemies.toString());
+                i.getAndIncrement();
+            });
             select = sc.nextInt();
-            if()
-        }while()
-        badPeople.subList(this.minScope - 1, index_max - 1).remove();
+            out_of_range = select < 1 || select > auxBadPeople.size();
+            if(!out_of_range) {
+                badPeople.get((this.minScope - 1) + select).danar(hurt);
+                select = (this.minScope - 1) + select;
+            }
+        }while(out_of_range);
+        if(!badPeople.get(select).isAlive()) badPeople.remove(select);
     }
 
 }
