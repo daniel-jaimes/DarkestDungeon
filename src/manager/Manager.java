@@ -35,7 +35,6 @@ public class Manager {
             for (int i = 0; i < this.allPlayers.length; i++) {
                 System.out.println(i + " - " + this.allPlayers[i].toString());
             }
-            //TO DO -> CONTROL BY UTILS
             int select = sc.nextInt();
             this.goodPeople.add(this.allPlayers[select].copy());
             num++;
