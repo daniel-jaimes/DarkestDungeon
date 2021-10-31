@@ -8,7 +8,10 @@ public class AsaltaTumbas extends Character {
     public AsaltaTumbas() {
         super(4, 5, 1, 3);
     }
-
+    @Override
+    public Character copy() {
+        return super.copy();
+    }
     @Override
     protected String getTipo(){
         return this.getClass().getSimpleName();

@@ -7,7 +7,10 @@ public class Abomination extends Character {
     public Abomination() {
         super(3, 4, 1, 2);
     }
-
+    @Override
+    public Character copy() {
+        return super.copy();
+    }
     @Override
     protected String getTipo(){
         return this.getClass().getSimpleName();

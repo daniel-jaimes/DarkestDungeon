@@ -7,7 +7,10 @@ public class CazaRecompensas extends Character {
     public CazaRecompensas() {
         super(3, 3, 2, 3);
     }
-
+    @Override
+    public Character copy() {
+        return super.copy();
+    }
     @Override
     protected String getTipo(){
         return this.getClass().getSimpleName();

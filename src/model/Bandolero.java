@@ -6,7 +6,10 @@ public class Bandolero extends Character {
     public Bandolero() {
         super(5, 4, 2, 4);
     }
-
+    @Override
+    public Character copy() {
+        return super.copy();
+    }
     @Override
     protected String getTipo(){
         return this.getClass().getSimpleName();
