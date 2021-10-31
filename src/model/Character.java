@@ -167,6 +167,7 @@ public class Character {
         setStress(getStress() * this.level);
     }
 
-
-
+    public void setLevel(int level) {
+        this.level = level;
+    }
 }
