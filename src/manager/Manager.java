@@ -4,10 +4,7 @@ package manager;
 import model.*;
 import model.Character;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Manager {
     private ArrayList<Character> goodPeople;
@@ -28,6 +25,7 @@ public class Manager {
         menuInicial(sc);
         generarEnemigos();
         showMenu(sc);
+        sc.close();
     }
     private void menuInicial(Scanner sc) {
         System.out.println("Escoge 4 personajes");
@@ -44,6 +42,8 @@ public class Manager {
         } while (num < 5);
     }
     private void showMenu(Scanner sc){
+        boolean globalHealth, checkSaludEnemies, checkSaludGoodPeople;
+        globalHealth = checkSaludEnemies = checkSaludGoodPeople = true;
         System.out.println("-> INICIANDO PARTIDA <-");
         do {
             System.out.println("Personajes:");
@@ -52,7 +52,10 @@ public class Manager {
             int select = sc.nextInt();
             switch(select){
                 case 1:
-                    newDungeon(sc);
+                    newDungeon(sc, checkSaludEnemies, checkSaludGoodPeople);
+                    if(!checkSaludEnemies) System.out.println("HAN MUERTO TODOS LOS ENEMIGOS");
+                    if(!checkSaludGoodPeople) System.out.println("HAN MUERTO TODOS LOS PERSONAJES");
+                    globalHealth = checkSaludEnemies && checkSaludGoodPeople;
                     break;
                 case 2:
                     descansar();
@@ -60,11 +63,14 @@ public class Manager {
                 case 3:
                     reordenar(sc);
                     break;
+                case 0:
+                    globalHealth = false;
+                    break;
                 default:
                     System.err.println("OPCION INCORRECTA!");
                     break;
             }
-        } while (true);
+        } while (globalHealth);
     }
     private void reordenar(Scanner sc) {
         int posOut, posIn;
@@ -90,27 +96,36 @@ public class Manager {
         this.goodPeople.forEach(goodPerson -> goodPerson.descansar());
     }
 
-    private void newDungeon(Scanner sc) {
+    private void newDungeon(Scanner sc, boolean checkSaludEnemies, boolean checkSaludGoodPeople) {
         this.goodPeople.forEach(person -> {
             int hurt;
             if(person.isAlive()){
-                System.out.println(person);
+                System.out.println("Turno de: " + person);
                 hurt = person.menu(sc);
-                person.movementEnemiesClose(this.badPeople, hurt);
+                person.movementEnemiesClose(this.badPeople, hurt, sc);
             }
         });
-        this.badPeople.forEach(badboy -> {
-            int rnd = aleatorio();
-            int hurt = badboy.habilidadRandom(aleatorio());
-            if(rnd <= this.goodPeople.size()){
-                if(this.goodPeople.get(rnd).isAlive()){
-                    this.goodPeople.get(rnd).danar(hurt);
-                } else {
-                    this.goodPeople.remove(rnd);
-                }
-            } else System.out.println("Enemigo ha fallado el ataque");
-
-        });
+        checkSaludEnemies = checkSalud((Character[]) this.badPeople.toArray());
+        if(checkSaludEnemies) {
+            this.badPeople.forEach(badboy -> {
+                int rnd = aleatorio();
+                int hurt = badboy.habilidadRandom(aleatorio());
+                if(rnd <= this.goodPeople.size() || hurt == 0){
+                    if(this.goodPeople.get(rnd).isAlive()){
+                        this.goodPeople.get(rnd).danar(hurt);
+                    } else {
+                        this.goodPeople.remove(rnd);
+                    }
+                } else System.out.println("Enemigo ha fallado el ataque");
+            });
+        }
+        checkSaludGoodPeople = checkSalud((Character[]) this.goodPeople.toArray());
+    }
+    private boolean checkSalud(Character[] players){
+        for (Character guy : players) {
+            if(guy.isAlive()) return true;
+        }
+        return false;
     }
 
     private void generarEnemigos() {
