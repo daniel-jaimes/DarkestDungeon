@@ -55,7 +55,7 @@ public class Manager {
             int select = sc.nextInt();
             switch(select){
                 case 1:
-                    newDungeon();
+                    newDungeon(sc);
                     break;
                 case 2:
                     descansar();
@@ -95,12 +95,12 @@ public class Manager {
         this.goodPeople.forEach(goodPerson -> goodPerson.descansar());
     }
 
-    private void newDungeon() {
+    private void newDungeon(Scanner sc) {
         this.goodPeople.forEach(person -> {
             int hurt = 0;
             if(person.isAlive()){
                 System.out.println(person);
-                hurt = person.menu();
+                hurt = person.menu(sc);
                 person.movementEnemiesClose(this.badPeople, hurt);
                 
                 //(this.badPeople, hurt);
