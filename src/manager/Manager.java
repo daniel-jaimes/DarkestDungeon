@@ -29,7 +29,7 @@ public class Manager {
     }
     private void menuInicial(Scanner sc) {
         System.out.println("Escoge 4 personajes");
-        int num = 1;
+        int num = this.goodPeople.size();
         do {
             System.out.println("Personaje " + num);
             for (int i = 0; i < this.allPlayers.length; i++) {
@@ -56,6 +56,7 @@ public class Manager {
                     if(!checkSaludEnemies) System.out.println("HAN MUERTO TODOS LOS ENEMIGOS");
                     if(!checkSaludGoodPeople) System.out.println("HAN MUERTO TODOS LOS PERSONAJES");
                     globalHealth = checkSaludEnemies && checkSaludGoodPeople;
+                    nextLevel();
                     break;
                 case 2:
                     descansar();
@@ -72,6 +73,11 @@ public class Manager {
             }
         } while (globalHealth);
     }
+
+    private void nextLevel() {
+        this.goodPeople.forEach(guy -> guy.updateHealthAndStress());
+    }
+
     private void reordenar(Scanner sc) {
         int posOut, posIn;
         for (int i = 0; i < this.goodPeople.size(); i++) {
@@ -110,7 +116,7 @@ public class Manager {
             this.badPeople.forEach(badboy -> {
                 int rnd = aleatorio();
                 int hurt = badboy.habilidadRandom(aleatorio());
-                if(rnd <= this.goodPeople.size() || hurt == 0){
+                if(rnd <= this.goodPeople.size() || hurt != 0){
                     if(this.goodPeople.get(rnd).isAlive()){
                         this.goodPeople.get(rnd).danar(hurt);
                     } else {
@@ -119,7 +125,7 @@ public class Manager {
                 } else System.out.println("Enemigo ha fallado el ataque");
             });
         }
-        checkSaludGoodPeople = checkSalud((Character[]) this.goodPeople.toArray());
+        if(this.goodPeople.size() < 4) menuInicial(sc);
     }
     private boolean checkSalud(Character[] players){
         for (Character guy : players) {
