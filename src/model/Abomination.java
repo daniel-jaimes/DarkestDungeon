@@ -19,7 +19,6 @@ public class Abomination extends Character {
     //HABILITIES
     @Override
     public int habilidad1(){
-        System.out.println(descripcionHabilidad1());
         return 3;
     }
     @Override
@@ -29,12 +28,10 @@ public class Abomination extends Character {
         dado1 = rnd.nextInt(6) + 1;
         dado2 = rnd.nextInt(6) + 1;
         hurt = dado1 + dado2;
-        System.out.println(descripcionHabilidad2());
         return hurt;
     }
     @Override
     public int habilidad3(){
-        System.out.println(descripcionHabilidad3());
         return -1;
     }
     @Override
