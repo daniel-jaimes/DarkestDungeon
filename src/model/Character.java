@@ -21,8 +21,12 @@ public class Character {
     public String toString(){
         return "[tipo=" + getTipo() + ", salud=" + this.health + ", estres=" + this.stress + "]";
     }
+    //GETTERS
     protected String getTipo(){
         return "Soy la clase papasote";
+    }
+    public boolean checkStress(){
+        return 0 < this.stress;
     }
     public void descansar(){
 
@@ -44,9 +48,7 @@ public class Character {
         System.out.println("Habilidad basica");
         return 1;
     }
-    public boolean checkStress(){
-        return 0 < this.stress;
-    }
+
     public void danar(int dano){
         if(this.health <= dano && this.health >= 0) this.life = false;
         else this.health -= dano;
@@ -83,7 +85,7 @@ public class Character {
             System.out.println("Turno de: " + this);
             System.out.print("1 - " + descripcionHabilidad1() +
                     "\n2 - " + descripcionHabilidad2() +
-                    "\n3 - " + descripcionHabilidad3());
+                    "\n3 - " + descripcionHabilidad3() + " (1 - 3)");
             switch(sc.nextInt()){
                 case 1:
                     hurt = habilidad1();
