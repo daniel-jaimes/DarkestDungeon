@@ -11,12 +11,24 @@ public class Character {
     private int minScope;
     private int maxScope;
     private boolean life;
+    private int level;
     public Character(int health, int stress, int minScope, int maxScope) {
         this.health = health;
         this.stress = stress;
         this.minScope = minScope;
         this.maxScope = maxScope;
         this.life = true;
+        this.level = 1;
+    }
+    public Character(int minScope, int maxScope){
+        this.minScope = minScope;
+        this.maxScope = maxScope;
+        this.life = true;
+        this.level = 1;
+    }
+    void setHealthAndStress(int health, int stress){
+        this.health = health;
+        this.stress = stress;
     }
     public Character copy(){
         return new Character(this.health, this.stress, this.minScope, this.maxScope);
@@ -28,10 +40,7 @@ public class Character {
     public void descansar(){
 
     }
-    //SETTERS
-    void maxHealth(int health){
-        this.health = health;
-    }
+
     //HABILITIES
     public int habilidad1(){
         System.out.println("Habilidad basica");
@@ -53,18 +62,18 @@ public class Character {
         }
         else this.health -= dano;
         if (dano < 0){
-            if(this.stress <= Math.abs(dano)){
+            if(this.stress + Math.abs(dano) >= 10){
                 System.out.println(this + " ha muerto por el estres!");
                 this.life = false;
             }
-            else this.stress = this.stress - Math.abs(dano);
+            else this.stress = this.stress + Math.abs(dano);
         }
     }
     //SETTERS
-    private void setStress(int stress) {
+    void setStress(int stress) {
         this.stress = stress;
     }
-    private void setHealth(int health){
+    void setHealth(int health){
         this.health = health;
     }
     protected void recoverStress(int stress){
@@ -152,5 +161,12 @@ public class Character {
         }while(out_of_range);
         if(!badPeople.get(select).isAlive()) badPeople.remove(select);
     }
+    public void updateHealthAndStress(){
+        this.level++;
+        setHealth(getHealth() * this.level);
+        setStress(getStress() * this.level);
+    }
+
+
 
 }

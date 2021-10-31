@@ -3,8 +3,11 @@ package model;
 import java.util.Random;
 
 public class Bandolero extends Character {
-    public Bandolero() {
-        super(5, 4, 2, 4);
+    private final int health = 5;
+    private final int stress = 4;
+    public Bandolero(){
+        super(2, 4);
+        super.setHealthAndStress(health, stress);
     }
     @Override
     public Character copy() {
@@ -16,7 +19,8 @@ public class Bandolero extends Character {
     }
     @Override
     public void descansar(){
-        super.maxHealth(5);
+        super.setHealth(this.health);
+        super.setStress(this.stress);
     }
     //HABILITIES - return hurt
     @Override

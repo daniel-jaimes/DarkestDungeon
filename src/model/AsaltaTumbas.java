@@ -3,10 +3,11 @@ package model;
 import java.util.Random;
 
 public class AsaltaTumbas extends Character {
-
-
+    private final int health = 4;
+    private final int stress = 5;
     public AsaltaTumbas() {
-        super(4, 5, 1, 3);
+        super(1, 3);
+        super.setHealthAndStress(health, stress);
     }
     @Override
     public Character copy() {
@@ -18,7 +19,8 @@ public class AsaltaTumbas extends Character {
     }
     @Override
     public void descansar(){
-        super.maxHealth(4);
+        super.setHealth(health);
+        super.setStress(stress);
     }
     //HABILITIES
     @Override
