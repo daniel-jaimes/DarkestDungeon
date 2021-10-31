@@ -77,14 +77,28 @@ public class Character {
     }
 
 
-    public int menu(){
-        //TODO
+    public int menu(Scanner sc){
         int hurt = 0;
-        System.out.println("Turno de: " + this);
-        System.out.print("1 - " + descripcionHabilidad1() + "\n2 - " + descripcionHabilidad2() + "\n3 - " + descripcionHabilidad3());
-        hurt += habilidad1();
-        hurt += habilidad2();
-        hurt += habilidad3();
+        do {
+            System.out.println("Turno de: " + this);
+            System.out.print("1 - " + descripcionHabilidad1() +
+                    "\n2 - " + descripcionHabilidad2() +
+                    "\n3 - " + descripcionHabilidad3());
+            switch(sc.nextInt()){
+                case 1:
+                    hurt = habilidad1();
+                    break;
+                case 2:
+                    hurt = habilidad2();
+                    break;
+                case 3:
+                    hurt = habilidad3();
+                    break;
+                default:
+                    System.err.println("Eleccion erronea");
+                    break;
+            }
+        } while(hurt == 0);
         return hurt;
     }
     //DESCRIPCIONES DE HABILIDAD
