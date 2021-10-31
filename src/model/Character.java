@@ -21,13 +21,6 @@ public class Character {
     public String toString(){
         return "[tipo=" + getTipo() + ", salud=" + this.health + ", estres=" + this.stress + "]";
     }
-    //GETTERS
-    protected String getTipo(){
-        return "Soy la clase papasote";
-    }
-    public boolean checkStress(){
-        return 0 < this.stress;
-    }
     public void descansar(){
 
     }
@@ -77,12 +70,16 @@ public class Character {
     protected int getHealth(){
         return this.health;
     }
-
+    protected String getTipo(){
+        return "Soy la clase papasote";
+    }
+    public boolean checkStress(){
+        return 0 < this.stress;
+    }
 
     public int menu(Scanner sc){
         int hurt = 0;
         do {
-            System.out.println("Turno de: " + this);
             System.out.print("1 - " + descripcionHabilidad1() +
                     "\n2 - " + descripcionHabilidad2() +
                     "\n3 - " + descripcionHabilidad3() + " (1 - 3)");
@@ -115,13 +112,10 @@ public class Character {
     }
 
     public int habilidadRandom(int valor){
-        if(valor >= 0 && valor <= 3){
-            if(valor == 0) return habilidad1();
-            else if(valor == 1) return habilidad2();
-            else if(valor == 2) return habilidad3();
-            else return 0;
-        }
-        return -1;
+        if(valor == 0) return habilidad1();
+        else if(valor == 1) return habilidad2();
+        else if(valor == 2) return habilidad3();
+        else return 0;
     }
 
     public boolean isAlive() {
