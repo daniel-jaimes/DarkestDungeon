@@ -12,7 +12,7 @@ public class Character {
     private int maxScope;
     private boolean life;
     private int level;
-    public Character(int health, int stress, int minScope, int maxScope) {
+    private Character(int health, int stress, int minScope, int maxScope) {
         this.health = health;
         this.stress = stress;
         this.minScope = minScope;
