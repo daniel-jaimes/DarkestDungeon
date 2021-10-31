@@ -37,7 +37,7 @@ public class Manager {
             }
             //TO DO -> CONTROL BY UTILS
             int select = sc.nextInt();
-            this.goodPeople.add(this.allPlayers[select]);
+            this.goodPeople.add(this.allPlayers[select].copy());
             num++;
         } while (num < 5);
     }

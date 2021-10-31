@@ -18,6 +18,9 @@ public class Character {
         this.maxScope = maxScope;
         this.life = true;
     }
+    public Character copy(){
+        return new Character(this.health, this.stress, this.minScope, this.maxScope);
+    }
     @Override
     public String toString(){
         return "[tipo=" + getTipo() + ", salud=" + this.health + ", estres=" + this.stress + "]";
@@ -44,10 +47,16 @@ public class Character {
     }
 
     public void danar(int dano){
-        if(this.health <= dano && this.health >= 0) this.life = false;
+        if(this.health <= dano && this.health >= 0){
+            System.out.println(this + " ha muerto por la salud!");
+            this.life = false;
+        }
         else this.health -= dano;
         if (dano < 0){
-            if(this.stress <= Math.abs(dano))this.life = false;
+            if(this.stress <= Math.abs(dano)){
+                System.out.println(this + " ha muerto por el estres!");
+                this.life = false;
+            }
             else this.stress = this.stress - Math.abs(dano);
         }
     }
