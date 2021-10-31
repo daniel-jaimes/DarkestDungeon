@@ -26,12 +26,9 @@ public class Manager {
     public void init() {
         Scanner sc = new Scanner(System.in);
         menuInicial(sc);
+        generarEnemigos();
         showMenu(sc);
-
     }
-
-
-
     private void menuInicial(Scanner sc) {
         System.out.println("Escoge 4 personajes");
         int num = 1;
@@ -78,14 +75,12 @@ public class Manager {
         posOut = sc.nextInt();
         System.out .println("¿A que posicion?");
         posIn = sc.nextInt();
-        //Si el cambio posicion es de
         if(posIn != posOut){
             if(!(posIn > posOut)) {
                 posIn = posIn + posOut;
                 posOut = posIn - posOut;
                 posIn = posIn - posOut;
             }
-            //Cambio de posicion
             Collections.swap(this.goodPeople, posOut, posIn);
         }
         showCharacters();
@@ -97,17 +92,24 @@ public class Manager {
 
     private void newDungeon(Scanner sc) {
         this.goodPeople.forEach(person -> {
-            int hurt = 0;
+            int hurt;
             if(person.isAlive()){
                 System.out.println(person);
                 hurt = person.menu(sc);
                 person.movementEnemiesClose(this.badPeople, hurt);
-                
-                //(this.badPeople, hurt);
-
-            } else {
-
             }
+        });
+        this.badPeople.forEach(badboy -> {
+            int rnd = aleatorio();
+            int hurt = badboy.habilidadRandom(aleatorio());
+            if(rnd <= this.goodPeople.size()){
+                if(this.goodPeople.get(rnd).isAlive()){
+                    this.goodPeople.get(rnd).danar(hurt);
+                } else {
+                    this.goodPeople.remove(rnd);
+                }
+            } else System.out.println("Enemigo ha fallado el ataque");
+
         });
     }
 
