@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -80,9 +81,9 @@ public class Character {
     public int menu(Scanner sc){
         int hurt = 0;
         do {
-            System.out.print("1 - " + descripcionHabilidad1() +
+            System.out.println("1 - " + descripcionHabilidad1() +
                     "\n2 - " + descripcionHabilidad2() +
-                    "\n3 - " + descripcionHabilidad3() + " (1 - 3)");
+                    "\n3 - " + descripcionHabilidad3());
             switch(sc.nextInt()){
                 case 1:
                     hurt = habilidad1();
@@ -121,13 +122,14 @@ public class Character {
     public boolean isAlive() {
         return this.life;
     }
-    public void movementEnemiesClose(ArrayList<Character> badPeople, int hurt){
-        Scanner sc = new Scanner(System.in);
-        boolean out_of_range = this.maxScope > badPeople.size();
-        int index_max = this.maxScope, select;
+    public void movementEnemiesClose(ArrayList<Character> badPeople, int hurt, Scanner sc){
+        boolean out_of_range = this.maxScope > badPeople.size() + 1;
+        int index_max, select;
         if(out_of_range) index_max = badPeople.size();
-        ArrayList<Character> auxBadPeople = (ArrayList<Character>) badPeople.subList(this.minScope - 1, index_max - 1);
+        else index_max = this.maxScope;
+        List<Character> auxBadPeople = badPeople.subList(this.minScope - 1, index_max);
         do {
+            System.out.println("¿A quien quieres a atacar?");
             AtomicInteger i = new AtomicInteger(1);
             auxBadPeople.forEach(enemies -> {
                 System.out.println(i + " - " + enemies.toString());
@@ -136,8 +138,7 @@ public class Character {
             select = sc.nextInt();
             out_of_range = select < 1 || select > auxBadPeople.size();
             if(!out_of_range) {
-                badPeople.get((this.minScope - 1) + select).danar(hurt);
-                select = (this.minScope - 1) + select;
+                badPeople.get(select - 1).danar(hurt);
             }
         }while(out_of_range);
         if(!badPeople.get(select).isAlive()) badPeople.remove(select);
